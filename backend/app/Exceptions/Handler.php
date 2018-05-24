@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +51,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if ($exception instanceof TokenExpiredException) {
+            return response()->json(['token_expired'], $exception->getStatusCode());
+        } else if ($exception instanceof TokenInvalidException) {
+            return response()->json(['token_invalid'], $exception->getStatusCode());
+        } else if( $exception instanceof JWTException) {
+            return response()->json(['error' => 'Error ferching'], $exception->getStatusCode());
+        }
+
+        return response()->json(
+            [
+                'errors' => [
+                    'status' => 401,
+                    'message' => 'Unauthenticated',
+                ]
+            ], 401
+        );
+
+        //return parent::render($request, $exception);
     }
 }
