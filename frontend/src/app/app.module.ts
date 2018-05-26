@@ -7,12 +7,12 @@ import { ComponentsModule } from './components/components.module';
 import { RoutingModule } from './routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { AuthTokenService } from './services/auth-token.service';
 import { AuthEventService } from './services/auth-event.service';
 import { AfterLoginService } from './services/after-login.service';
 import { BeforeLoginService } from './services/before-login.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginGuardService } from './auth/login-guard.service';
+import { AuthTokenService } from './auth/auth-token.service';
 
 
 @NgModule({

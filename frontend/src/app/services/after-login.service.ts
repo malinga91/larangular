@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AuthTokenService } from './auth-token.service';
+import { AuthTokenService } from '../auth/auth-token.service';
 
 @Injectable()
 export class AfterLoginService implements CanActivate {

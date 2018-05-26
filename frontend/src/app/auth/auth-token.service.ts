@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthTokenService {
@@ -19,7 +20,7 @@ export class AuthTokenService {
 
   isValid() {
     const token = this.getToken();
-    console.log('getToken :', token);
+
     if(token) {
       return true;
     }else{
@@ -27,8 +28,11 @@ export class AuthTokenService {
     }
   }
 
+  decodeToken(token) {
+    return jwt_decode(token);
+  }
+
   loggedIn() {
-    console.log('LoggedIn auth token : ', this.isValid());
     return this.isValid();
   }
 

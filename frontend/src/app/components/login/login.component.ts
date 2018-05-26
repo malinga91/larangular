@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { AuthTokenService } from '../../services/auth-token.service';
 import { Router } from '@angular/router';
 import { AuthEventService } from '../../services/auth-event.service';
+import { AuthTokenService } from '../../auth/auth-token.service';
 
 @Component({
   selector: 'app-login',
@@ -43,11 +43,13 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(postData).then(
         res => {
-          console.log(res.access_token);
-          if(res.access_token) {
-            this.tokenService.setToken(res.access_token);
+          console.log(res);
+          if(res['success']) {
+            this.tokenService.setToken(res['data']['access_token']);
             this.authEventService.changeAuthStatus(true);
             this.router.navigateByUrl('/dashboard');
+          }else{
+            alert(res);
           }
         }
       );

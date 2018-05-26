@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AuthTokenService } from '../auth/auth-token.service';
 
 @Injectable()
 export class AuthEventService {
 
-  private loggedIn = new BehaviorSubject<boolean>(false)
+  private loggedIn = new BehaviorSubject<boolean>(this.tokenService.isValid());
 
   authStatus = this.loggedIn.asObservable();
 
@@ -12,6 +13,8 @@ export class AuthEventService {
     this.loggedIn.next(value);
   }
 
-  constructor() { }
+  constructor(
+    private tokenService: AuthTokenService
+  ) { }
 
 }

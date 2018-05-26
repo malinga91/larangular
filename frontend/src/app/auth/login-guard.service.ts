@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AuthTokenService } from '../services/auth-token.service';
+import { AuthTokenService } from './auth-token.service';
 
 @Injectable()
 export class LoginGuardService implements CanActivate {

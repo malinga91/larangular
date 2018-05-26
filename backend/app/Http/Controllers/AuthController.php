@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
 
 class AuthController extends Controller
 {
@@ -18,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('auth.jwt:api', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -36,16 +36,37 @@ class AuthController extends Controller
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                $data = [
+                    'status' => 'error',
+                    'data'  => [
+                        'error' => "Invalid Credentials"
+                    ]
+                ];
+                return response()->json($data, 401);
             }
         } catch (JWTException $e) {
+
             // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            $data = [
+                'status' => 'error',
+                'data'  => [
+                    'error' => "Could not create token"
+                ]
+            ];
+            return response()->json($data, 500);
         }
 
-        $user = auth()->user();
+        $data = [
+            'success' => true,
+            'message' => 'User logged successfully',
+            'data'  => [
+                'access_token' => $token,
+                'user' => auth()->user()
+            ]
+        ];
+
         // all good so return the token
-        return response()->json(compact('token', 'user'));
+        return response()->json($data);
 
     }
 
@@ -66,6 +87,7 @@ class AuthController extends Controller
         $user = User::create($data);
 
         return response()->json([
+            'success' => true,
             'message' => 'User successfully created!',
             'data' => $user
         ], 201);
@@ -80,7 +102,13 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $data = [
+            'success' => 'true',
+            'data'  => [
+                'user' => JWTAuth::toUser()
+            ]
+        ];
+        return response()->json($data);
     }
 
     /**
