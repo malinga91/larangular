@@ -29,4 +29,8 @@ Route::group([
         'middleware' => 'auth.jwt'
     ]);
 
+    Route::get('facebook/login', 'SocialAuthController@login');
+    Route::get('facebook/login/callback', 'SocialAuthController@callback');
+    Route::get('facebook/logout', 'SocialAuthController@logout');
+
 });

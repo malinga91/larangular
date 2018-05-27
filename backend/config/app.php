@@ -179,6 +179,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Providers by Malinga
+         */
+        App\Providers\FacebookServiceProvider::class
+
     ],
 
     /*

@@ -1,3 +1,3 @@
 export const config = {
-    ApiBase: "http://localhost/LaravelAngular/backend/public/api/"
+    ApiBase: "http://localhost:8000/api/"
 }
