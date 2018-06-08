@@ -11,16 +11,6 @@ export class AuthService {
     private tokenService: AuthTokenService
   ) { }
 
-  getLoginUrl() {
-    return this.http.get(config.ApiBase + 'facebook/login')
-      .toPromise().then(
-        res => {
-          console.log(res);
-          return res;
-        }
-      );
-  }
-
   login(data) {
     return this.http.post(config.ApiBase + 'login', data)
       .toPromise().then(result => {

@@ -13,6 +13,7 @@ import { BeforeLoginService } from './services/before-login.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginGuardService } from './auth/login-guard.service';
 import { AuthTokenService } from './auth/auth-token.service';
+import { AuthFbService } from './services/auth-fb.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { AuthTokenService } from './auth/auth-token.service';
     ComponentsModule,
     RoutingModule,
   ],
-  providers: [AuthService, AuthTokenService, AuthEventService, BeforeLoginService, AfterLoginService, AuthGuardService, LoginGuardService],
+  providers: [AuthService, AuthFbService, AuthTokenService, AuthEventService, BeforeLoginService, AfterLoginService, AuthGuardService, LoginGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

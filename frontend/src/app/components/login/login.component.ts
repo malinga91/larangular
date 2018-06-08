@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
+  fbLoginUrl: string;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,

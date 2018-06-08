@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { LoginGuardService } from './auth/login-guard.service';
+import { FbLoginComponent } from './components/fb-login/fb-login.component';
 
 
 const appRoutes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: FbLoginComponent,
     canActivate: [LoginGuardService]
     
   },
@@ -29,6 +29,14 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: './404',
+  },
+  {
+    path: '404',
+    component: DashboardComponent
   }
 ]
 

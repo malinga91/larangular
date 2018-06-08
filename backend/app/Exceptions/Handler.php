@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
         } else if( $exception instanceof JWTException) {
             return Response::json(['error' => 'Error Fetching Token'], $exception->getStatusCode());
         }else{
-            return Response::json(['error -' => $exception->getMessage()], $exception->getStatusCode());
+            return Response::json(['Error ' => $exception->getMessage()]);
         }
 
 

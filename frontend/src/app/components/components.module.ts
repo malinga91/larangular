@@ -7,6 +7,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FbLoginComponent } from './fb-login/fb-login.component';
+import { FacebookService } from '../services/FacebookService';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     RouterModule
   ],
-  declarations: [NavBarComponent, LoginComponent, SignupComponent, DashboardComponent],
-  exports: [NavBarComponent]
+  declarations: [NavBarComponent, LoginComponent, SignupComponent, DashboardComponent, FbLoginComponent],
+  exports: [NavBarComponent],
+  providers: [FacebookService]
 })
 export class ComponentsModule { }

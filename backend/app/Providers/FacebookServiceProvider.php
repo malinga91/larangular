@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Helper\FbPersistentDataHandler;
 use Facebook\Facebook;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,10 +25,7 @@ class FacebookServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Facebook::class, function ($app) {
-            return new Facebook([
-                'app_id' => env('FACEBOOK_ID'),         // Your GitHub Client ID
-                'app_secret' => env('FACEBOOK_SECRET'), // Your GitHub Client Secret
-            ]);
+            return new Facebook(config('facebook.config'));
         });
     }
 }
